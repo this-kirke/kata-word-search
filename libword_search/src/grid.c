@@ -59,9 +59,20 @@ bool word_search__grid__sequence_matches_word(
     WordSearch__GridSequence sequence,
     String word
 ){
-    (void)( grid );
-    (void)( sequence );
-    (void)( word );
+    if( sequence.span.magnitude != word.length ){
+        return false;
+    }
 
-    return false;
+    for( unsigned long long character_index = 0; character_index < word.length; character_index++ ){
+        char entry;
+        if( word_search__grid__retrieve_sequence_entry( grid, sequence, character_index, &entry ) == false ){
+            return false;
+        }
+
+        if( word.data[ character_index ] != entry ){
+            return false;
+        }
+    }
+
+    return true;
 }
