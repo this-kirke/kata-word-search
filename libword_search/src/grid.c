@@ -52,3 +52,16 @@ bool word_search__grid__retrieve_sequence_entry(
 
     return word_search__grid__entry( grid, current_coordinates, out_entry );
 }
+
+
+bool word_search__grid__sequence_matches_word(
+    WordSearch__Grid grid,
+    WordSearch__GridSequence sequence,
+    String word
+){
+    (void)( grid );
+    (void)( sequence );
+    (void)( word );
+
+    return false;
+}

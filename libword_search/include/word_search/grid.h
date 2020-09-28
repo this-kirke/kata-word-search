@@ -95,6 +95,19 @@ bool word_search__grid__retrieve_sequence_entry(
 );
 
 /**
+ *  \brief This method determines whether the supplied sequence of grid entries represents the supplied word.
+ *  \param grid The WordSearch__Grid containing the entries described by \p sequence.
+ *  \param sequence A pointer to the WordSearch__GridSequence describing the entries of interest on the grid.
+ *  \param word A pointer a String containing the word which will be matched to the grid sequence.
+ *  \returns true if the entries described by \p sequence exactly match the supplied word, and false if they do not match.
+ */
+bool word_search__grid__sequence_matches_word(
+    WordSearch__Grid grid,
+    WordSearch__GridSequence sequence,
+    String word
+);
+
+/**
  *  @} // group word_search__grid
  */
 

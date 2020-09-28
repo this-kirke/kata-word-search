@@ -133,3 +133,123 @@ TEST_CASE_METHOD( WordSearch__Grid__TestFixture, "word_search__grid__lookup_sequ
     REQUIRE( word_search__grid__retrieve_sequence_entry( grid, sequence, 15, &entry ) );
     REQUIRE( entry == ENTRIES.data[ 0 ] );
 }
+
+TEST_CASE_METHOD( WordSearch__Grid__TestFixture, "word_search__grid__sequence_matches_word", "[word_search__grid]" ){
+    String WORDS[ 9 ] = {
+        string__literal( "SCOTTY" ),
+        string__literal( "SPOCK" ),
+        string__literal( "BONES" ),
+        string__literal( "UHURA" ),
+        string__literal( "KIRK" ),
+        string__literal( "SULU" ),
+        string__literal( "KHAN" ),
+        string__literal( "RIKER" ),
+        string__literal( "WORF" )
+    };
+
+    WordSearch__GridSequence sequences[] = {
+        // SCOTTY
+        {
+            .start = {
+                .row = 5,
+                .column = 0
+            },
+            .span = {
+                .magnitude = 6,
+                .direction = WordSearch__Direction__East
+            }
+        },
+        // SPOCK
+        {
+            .start = {
+                .row = 1,
+                .column = 2
+            },
+            .span = {
+                .magnitude = 5,
+                .direction = WordSearch__Direction__SouthEast
+            }
+        },
+        // BONES
+        {
+            .start = {
+                .row = 6,
+                .column = 0
+            },
+            .span = {
+                .magnitude = 5,
+                .direction = WordSearch__Direction__South
+            }
+        },
+        // UHURA
+        {
+            .start = {
+                .row = 0,
+                .column = 4
+            },
+            .span = {
+                .magnitude = 5,
+                .direction = WordSearch__Direction__SouthWest
+            }
+        },
+        // KIRK
+        {
+            .start = {
+                .row = 7,
+                .column = 4
+            },
+            .span = {
+                .magnitude = 4,
+                .direction = WordSearch__Direction__West
+            }
+        },
+        // SULU
+        {
+            .start = {
+                .row = 3,
+                .column = 3
+            },
+            .span = {
+                .magnitude = 4,
+                .direction = WordSearch__Direction__NorthWest
+            }
+        },
+        // KHAN
+        {
+            .start = {
+                .row = 9,
+                .column = 5
+            },
+            .span = {
+                .magnitude = 4,
+                .direction = WordSearch__Direction__North
+            }
+        },
+        // RIKER
+        {
+            .start = {
+                .row = 14,
+                .column = 6
+            },
+            .span = {
+                .magnitude = 5,
+                .direction = WordSearch__Direction__NorthEast
+            }
+        },
+        // WORF
+        {
+            .start = {
+                .row = 14,
+                .column = 11
+            },
+            .span = {
+                .magnitude = 4,
+                .direction = WordSearch__Direction__NorthEast
+            }
+        }
+    };
+
+    for( unsigned long word_index = 0; word_index < 9; word_index++ ){
+        REQUIRE( word_search__grid__sequence_matches_word( grid, sequences[ word_index ], WORDS[ word_index ] ) );
+    }
+}
