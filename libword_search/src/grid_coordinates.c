@@ -5,8 +5,12 @@ bool word_search__grid_coordinates__equals(
     WordSearch__GridCoordinates first,
     WordSearch__GridCoordinates second
 ){
-    (void)( first );
-    (void)( second );
+    if(
+        first.row == second.row &&
+        first.column == second.column
+    ){
+        return true;
+    }
 
     return false;
 }
