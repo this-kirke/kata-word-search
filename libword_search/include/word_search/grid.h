@@ -41,8 +41,8 @@ typedef struct WordSearch__Grid {
     /** The height of the grid, in entries */
     unsigned long long height;
     /**
-     *  A pointer to a String containing the grid's entries. The length of this field should always be
-     *  width * height. The grid is laid out in row-major format, that is entries are 0-indexed
+     *  A String containing the grid's entries. The length of this field should always be
+     *  width * height. The grid is laid out in row-major format - that is, entries are zero-indexed
      *  from the top-left corner of the grid, and can be accessed by (row, column) coordinate pair, as in
      *      char entry = grid->entries.data[ ( row * width ) + column ], OR
      *  by calling the convenience method word_search__grid__entry.
@@ -51,7 +51,8 @@ typedef struct WordSearch__Grid {
 } WordSearch__Grid;
 
 /**
- *  \brief This method determines whether the given WordSearch__GridCoordinates reside within the grid.
+ *  \brief This method determines whether the given WordSearch__GridCoordinates reside within the confines of
+ *  the grid.
  *  \param grid The grid upon which the supplied WordSearch__GridCoordinates will be tested.
  *  \param coordinates The WordSearch__GridCoordinates which will be tested.
  *  \returns Returns true if \p coordinates does reside within the grid. That is, coordinates->row < grid->height and
