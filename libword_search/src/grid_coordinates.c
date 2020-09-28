@@ -14,3 +14,15 @@ bool word_search__grid_coordinates__equals(
 
     return false;
 }
+
+bool word_search__grid_coordinates__translate(
+    WordSearch__GridCoordinates coordinates,
+    WordSearch__GridVector vector,
+    WordSearch__GridCoordinates *out__translated_coordinates
+){
+    (void )( coordinates );
+    (void)( vector );
+    (void)( out__translated_coordinates );
+
+    return false;
+}
