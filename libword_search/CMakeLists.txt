@@ -6,6 +6,7 @@ add_library(
     ${libword_search__DIR}/src/grid_coordinates.c
     ${libword_search__DIR}/src/grid_sequence.c
     ${libword_search__DIR}/src/grid_vector.c
+    ${libword_search__DIR}/src/solution.c
 )
 
 target_include_directories(
@@ -62,6 +63,12 @@ if( BUILD_TESTS )
     catch2__add_test(
         NAME test__libword_search__grid_vector
         SOURCES "${libword_search__DIR}/test/test__libword_search__grid_vector.cpp"
+        LINK_LIBRARIES libword_search
+    )
+
+    catch2__add_test(
+        NAME test__libword_search__solution
+        SOURCES "${libword_search__DIR}/test/test__libword_search__solution.cpp"
         LINK_LIBRARIES libword_search
     )
 
