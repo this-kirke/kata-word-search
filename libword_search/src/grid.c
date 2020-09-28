@@ -11,3 +11,15 @@ bool word_search__grid__contains( WordSearch__Grid grid, WordSearch__GridCoordin
 
     return false;
 }
+
+bool word_search__grid__entry(
+    WordSearch__Grid grid,
+    WordSearch__GridCoordinates coordinates,
+    char *out__entry_value
+){
+    (void)( grid );
+    (void)( coordinates );
+    (void)( out__entry_value );
+
+    return false;
+}

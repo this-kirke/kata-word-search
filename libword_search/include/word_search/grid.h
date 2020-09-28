@@ -62,6 +62,19 @@ typedef struct WordSearch__Grid {
 bool word_search__grid__contains( WordSearch__Grid grid, WordSearch__GridCoordinates coordinates );
 
 /**
+ *  \brief Convenience method to retrieve the value of the entry of the WordSearch__Grid at the specified (row, column)
+ *  coordinate pair.
+ *  \param grid The WordSearch__Grid from which the entry should be retrieved.
+ *  \param coordinates The WordSearch__GridCoordinates at which the entry to be retrieved resides.
+ *  \param out__entry_value An out parameter. Upon successful completion, this will store the value of the specified
+ *  entry.
+ *  \returns Returns true if the operation completed successfully. This operation can fail if the specified coordinates
+ *  do not reside within the confines of the WordSearch__Grid.
+ *  \returns Returns false if the operation did not complete successfully.
+ */
+bool word_search__grid__entry( WordSearch__Grid grid, WordSearch__GridCoordinates coordinates, char *out__entry_value );
+
+/**
  *  @} // group word_search__grid
  */
 
