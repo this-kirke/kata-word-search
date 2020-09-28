@@ -17,9 +17,10 @@ bool word_search__grid__entry(
     WordSearch__GridCoordinates coordinates,
     char *out__entry_value
 ){
-    (void)( grid );
-    (void)( coordinates );
-    (void)( out__entry_value );
+    if( word_search__grid__contains( grid, coordinates ) ){
+        *out__entry_value = grid.entries.data[ ( coordinates.row * grid.width ) + coordinates.column ];
+        return true;
+    }
 
     return false;
 }
