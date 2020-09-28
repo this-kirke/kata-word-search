@@ -75,6 +75,26 @@ bool word_search__grid__contains( WordSearch__Grid grid, WordSearch__GridCoordin
 bool word_search__grid__entry( WordSearch__Grid grid, WordSearch__GridCoordinates coordinates, char *out__entry_value );
 
 /**
+ *  \brief Given a sequence and an index into that sequence, this method looks up the value of the value of
+ *  the corresponding grid entry.
+ *  \param grid A pointer to the WordSearch__Grid containing the desired entry.
+ *  \param sequence A pointer to the WordSearch__GridSequence.
+ *  \param index The index into the sequence of the desired entry.
+ *  \param out_entry An out parameter. Upon successful completion, this will be assigned to the value of the
+ *  desired entry.
+ *  \returns Returns true if the operation completed successfully. The retrieval can fail if either the index is
+ *  greater than or equal to sequence->span.magnitude, or if the corresponding entry is not contained by the
+ *  grid.
+ *  \returns Returns false if the operation did not complete successfully.
+ */
+bool word_search__grid__retrieve_sequence_entry(
+    WordSearch__Grid grid,
+    WordSearch__GridSequence sequence,
+    unsigned long long index,
+    char* out_entry
+);
+
+/**
  *  @} // group word_search__grid
  */
 

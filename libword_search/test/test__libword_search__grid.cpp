@@ -100,3 +100,36 @@ TEST_CASE_METHOD( WordSearch__Grid__TestFixture, "word_search__grid__entry", "[w
     current_coordinates = { .row = 15, .column = 15 };
     REQUIRE_FALSE( word_search__grid__entry( grid, current_coordinates, &entry_value) );
 }
+
+TEST_CASE_METHOD( WordSearch__Grid__TestFixture, "word_search__grid__lookup_sequence_entry", "[word_search__grid]" ){
+    WordSearch__GridSequence sequence = {
+        .start = {
+            .row = 0,
+            .column = 0
+        },
+        .span = {
+            .magnitude = 15,
+            .direction = WordSearch__Direction__SouthEast
+        }
+    };
+
+    char entry;
+    for( unsigned long entry_index = 0; entry_index < GRID_DIM; entry_index++ ){
+        REQUIRE( word_search__grid__retrieve_sequence_entry( grid, sequence, entry_index, &entry ) );
+        REQUIRE( entry == ENTRIES.data[ entry_index * GRID_DIM + entry_index ] );
+    }
+
+    // Test whether index >= sequence.span.magnitude returns 0.
+    REQUIRE_FALSE( word_search__grid__retrieve_sequence_entry( grid, sequence, GRID_DIM + 1, &entry ) );
+
+    // Test whether off-grid entries return 0.
+    sequence.start = (WordSearch__GridCoordinates) { .row = 0, .column = 15 };
+    REQUIRE_FALSE( word_search__grid__retrieve_sequence_entry( grid, sequence, 0, &entry ) );
+
+    // Just for fun, make sure that even if part of the sequence is off the grid, if the entry we want is on the grid,
+    // we still get the desired value.
+    sequence.span.magnitude = 16;
+    sequence.span.direction = WordSearch__Direction__West;
+    REQUIRE( word_search__grid__retrieve_sequence_entry( grid, sequence, 15, &entry ) );
+    REQUIRE( entry == ENTRIES.data[ 0 ] );
+}
