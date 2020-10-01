@@ -40,6 +40,33 @@ void word_search__grid_hash_map__initialize( WordSearch__GridHashMap *grid_hash_
  */
 void word_search__grid_hash_map__clear( WordSearch__GridHashMap *grid_hash_map );
 
+/**
+ *  \brief This method retrieves a list of WordSearch__GridCoordinates corresponding to the least common letter
+ *  of the provided word.
+ *
+ *  First, this method iterates through the letters of the provided word, and queries the hash map to determine
+ *  which letter of the word occurs least often in the grid.
+ *
+ *  Once we know which letter is least common, we return the list of all its occurences to the caller. We also return
+ *  the index of word at which the least common character is found.
+ *
+ *  \param grid_hash_map A pointer to the initialized WordSearch__GridHashmap which will be used to look up candidate entries.
+ *  \param word The word whose characters will bill queried in the hash map
+ *  \param out__character_index An out parameter. Upon successful completion, this will store the index of the character into
+ *  the provided word, which the caller can reference.
+ *  \param out__candidate_coordinates An out parameter. Upon successful completion, this will store the list of
+ *  WordSearch__GridCoordinates corresponding to the least common letter of the word in the grid.
+ *  \returns Returns true if the operation completed successfully. This operation can fail if no characters of the word are
+ *  present in the grid (and thus the hash map).
+ *  \returns Returns false if the operation did not complete successfully.
+ */
+bool word_search__grid_hash_map__retrieve_candidate_coordinates(
+    WordSearch__GridHashMap grid_hash_map,
+    String word,
+    unsigned long long *out__character_index,
+    List__WordSearch__GridCoordinates **out__candidate_coordinates
+);
+
 END_DECLARATIONS
 
 #endif // WORD_SEARCH__GRID_HASH_MAP__H

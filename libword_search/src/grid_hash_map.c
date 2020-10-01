@@ -54,3 +54,17 @@ void word_search__grid_hash_map__initialize( WordSearch__GridHashMap *grid_hash_
 void word_search__grid_hash_map__clear( WordSearch__GridHashMap *grid_hash_map ){
     hash_map__char_to_list__word_search__grid_coordinates__clear( grid_hash_map );
 }
+
+bool word_search__grid_hash_map__retrieve_candidate_coordinates(
+    WordSearch__GridHashMap grid_hash_map,
+    String word,
+    unsigned long long *out__character_index,
+    List__WordSearch__GridCoordinates **out__candidate_coordinates
+){
+    (void)( grid_hash_map );
+    (void)( word );
+    (void)( out__character_index );
+    (void)( out__candidate_coordinates );
+
+    return false;
+}

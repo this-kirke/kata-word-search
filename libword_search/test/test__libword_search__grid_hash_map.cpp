@@ -57,3 +57,39 @@ class GridHashMap__TestFixture{
 TEST_CASE_METHOD( GridHashMap__TestFixture, "grid_hash_map__initialize_and_clear", "[grid_hash_map]" ){
     REQUIRE( grid_hash_map.allocator == system_allocator.allocator );
 }
+
+TEST_CASE_METHOD( GridHashMap__TestFixture, "grid_hash_map__retrieve_candidate_coordinates", "[grid_hash_map]" ){
+    const String word = string__literal( "SCOTTY" );
+
+    const unsigned long long expected_character_index = 3;
+    const unsigned long long expected_coordinates_length = 7;
+    WordSearch__GridCoordinates expected_coordinates[ expected_coordinates_length ] = {
+        { .row = 2, .column = 13 },
+        { .row = 3, .column = 8 },
+        { .row = 4, .column = 12 },
+        { .row = 5, .column = 3 },
+        { .row = 5, .column = 4 },
+        { .row = 11, .column = 0 },
+        { .row = 11, .column = 10 },
+    };
+
+    unsigned long long character_index;
+    List__WordSearch__GridCoordinates *candidate_coordinates_list;
+    REQUIRE(
+            word_search__grid_hash_map__retrieve_candidate_coordinates(
+            grid_hash_map,
+            word,
+            &character_index,
+            &candidate_coordinates_list
+        )
+    );
+
+    REQUIRE( character_index == expected_character_index );
+    REQUIRE( list__word_search__grid_coordinates__length( candidate_coordinates_list ) == expected_coordinates_length );
+
+    unsigned long candidate_index = 0;
+    while( candidate_coordinates_list ){
+        REQUIRE( word_search__grid_coordinates__equals( candidate_coordinates_list->value, expected_coordinates[ candidate_index++ ] ) );
+        candidate_coordinates_list = candidate_coordinates_list->next;
+    }
+}
