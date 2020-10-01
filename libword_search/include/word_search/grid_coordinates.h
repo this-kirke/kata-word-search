@@ -10,6 +10,7 @@
 
 // 3rdParty Includes
 #include "kirke/macros.h"
+#include "kirke/list.h"
 
 // Internal Includes
 #include "word_search/grid_vector.h"
@@ -35,6 +36,12 @@ typedef struct WordSearch__GridCoordinates {
      */
     unsigned long long column;
 } WordSearch__GridCoordinates;
+
+LIST__DECLARE(
+    List__WordSearch__GridCoordinates,
+    list__word_search__grid_coordinates,
+    WordSearch__GridCoordinates
+)
 
 /**
  *  \brief Compares two WordSearch__GridCoordinates for equality

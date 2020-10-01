@@ -1,6 +1,13 @@
 // Internal Includes
 #include "word_search/grid_coordinates.h"
 
+LIST__DEFINE(
+    List__WordSearch__GridCoordinates,
+    list__word_search__grid_coordinates,
+    WordSearch__GridCoordinates,
+    word_search__grid_coordinates__equals
+)
+
 bool word_search__grid_coordinates__equals(
     WordSearch__GridCoordinates first,
     WordSearch__GridCoordinates second
