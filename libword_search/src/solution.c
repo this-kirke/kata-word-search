@@ -4,6 +4,13 @@
 // Internal Includes
 #include "word_search/solution.h"
 
+ARRAY__DEFINE(
+    Array__WordSearch__Solution,
+    array__word_search__solution,
+    WordSearch__Solution,
+    word_search__solution__equals
+)
+
 bool word_search__solution__equals( WordSearch__Solution first, WordSearch__Solution second ){
     // The two solutions are equal iff fields word and disposition are equal
     if(

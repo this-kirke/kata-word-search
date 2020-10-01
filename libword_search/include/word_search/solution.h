@@ -56,6 +56,12 @@ typedef struct WordSearch__Solution{
     WordSearch__GridSequence sequence;
 } WordSearch__Solution;
 
+ARRAY__DECLARE(
+    Array__WordSearch__Solution,
+    array__word_search__solution,
+    WordSearch__Solution
+)
+
 /**
  *  \brief Tests two WordSearch__Solution structures for equality
  *  \param first The first WordSearch__Solution to be compared.
