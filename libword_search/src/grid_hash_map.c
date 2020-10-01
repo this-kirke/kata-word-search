@@ -61,10 +61,24 @@ bool word_search__grid_hash_map__retrieve_candidate_coordinates(
     unsigned long long *out__character_index,
     List__WordSearch__GridCoordinates **out__candidate_coordinates
 ){
-    (void)( grid_hash_map );
-    (void)( word );
-    (void)( out__character_index );
-    (void)( out__candidate_coordinates );
+    unsigned long long shortest_list_length = ULLONG_MAX;
 
-    return false;
+    for( unsigned long long character_index = 0; character_index < word.length; character_index++ ){
+        List__WordSearch__GridCoordinates *entry_coordinates;
+        if( hash_map__char_to_list__word_search__grid_coordinates__retrieve( &grid_hash_map, word.data[ character_index ], &entry_coordinates ) == false ){
+            // Early exit is ok - if a character in the word doesn't exist in the hash map, then it doesn't exist in the grid.
+            // And if a character of the word we're seeking doesn't exist in the grid, then that word doesn't exist in the grid
+            // either - we shouldn't waste time searching for it.
+            return false;
+        }
+
+        unsigned long long entry_coordinates_length = list__word_search__grid_coordinates__length( entry_coordinates );
+        if( entry_coordinates_length < shortest_list_length ){
+            *out__character_index = character_index;
+            *out__candidate_coordinates = entry_coordinates;
+            shortest_list_length = entry_coordinates_length;
+        }
+    }
+
+    return true;
 }

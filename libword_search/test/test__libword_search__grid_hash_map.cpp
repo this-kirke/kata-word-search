@@ -76,7 +76,7 @@ TEST_CASE_METHOD( GridHashMap__TestFixture, "grid_hash_map__retrieve_candidate_c
     unsigned long long character_index;
     List__WordSearch__GridCoordinates *candidate_coordinates_list;
     REQUIRE(
-            word_search__grid_hash_map__retrieve_candidate_coordinates(
+        word_search__grid_hash_map__retrieve_candidate_coordinates(
             grid_hash_map,
             word,
             &character_index,
