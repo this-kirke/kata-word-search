@@ -93,4 +93,10 @@ if( BUILD_TESTS )
         LINK_LIBRARIES libword_search
     )
 
+    catch2__add_test(
+        NAME test__libword_search__user_stories
+        SOURCES "${libword_search__DIR}/test/test__libword_search__user_stories.cpp"
+        LINK_LIBRARIES libword_search
+    )
+
 endif( BUILD_TESTS )
