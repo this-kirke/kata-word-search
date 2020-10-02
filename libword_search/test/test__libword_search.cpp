@@ -146,3 +146,57 @@ TEST_CASE_METHOD( WordSearch__TestFixture, "word_search__find_word_in_direction"
         )
     );
 }
+
+TEST_CASE_METHOD( WordSearch__TestFixture, "word_search__find_word", "[word_search]" ){
+    String word;
+    WordSearch__Solution expected_solution;
+    WordSearch__Solution found_solution;
+
+    word = string__literal( "SCOTTY" );
+    expected_solution = {
+        .word = word,
+        .disposition = WordSearch__Solution__Disposition__Found,
+        .sequence = {
+            .start = {
+                .row = 5,
+                .column = 0
+            },
+            .span = {
+                .magnitude = 6,
+                .direction = WordSearch__Direction__East
+            }
+        }
+    };
+
+    found_solution = word_search__find_word( word, grid, grid_hash_map );
+
+    REQUIRE( word_search__solution__equals( found_solution, expected_solution ) );
+
+    word = string__literal( "SPOCK" );
+    expected_solution = (WordSearch__Solution) {
+        .word = word,
+        .disposition = WordSearch__Solution__Disposition__Found,
+        .sequence = {
+            .start = {
+                .row = 1,
+                .column = 2
+            },
+            .span = {
+                .magnitude = 5,
+                .direction = WordSearch__Direction__SouthEast
+            }
+        }
+    };
+
+    found_solution = word_search__find_word( word, grid, grid_hash_map );
+    REQUIRE( word_search__solution__equals( found_solution, expected_solution ) );
+
+    word = string__literal( "ABCDEFG" );
+    expected_solution = {
+        .word = word,
+        .disposition = WordSearch__Solution__Disposition__NotFound
+    };
+
+    found_solution = word_search__find_word( word, grid, grid_hash_map );
+    REQUIRE( word_search__solution__equals( found_solution, expected_solution ) );
+}
