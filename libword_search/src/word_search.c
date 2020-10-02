@@ -87,3 +87,21 @@ WordSearch__Solution word_search__find_word(
         .disposition = WordSearch__Solution__Disposition__NotFound
     };
 }
+
+bool word_search__search_in_direction(
+    Array__String words,
+    WordSearch__Grid grid,
+    WordSearch__GridHashMap grid_hash_map,
+    WordSearch__Direction direction,
+    Array__WordSearch__Solution* out__solutions,
+    Error *out__error
+){
+    (void)( words );
+    (void)( grid );
+    (void)( grid_hash_map );
+    (void)( direction );
+    (void)( out__solutions );
+    (void)( out__error );
+
+    return false;
+}

@@ -200,3 +200,115 @@ TEST_CASE_METHOD( WordSearch__TestFixture, "word_search__find_word", "[word_sear
     found_solution = word_search__find_word( word, grid, grid_hash_map );
     REQUIRE( word_search__solution__equals( found_solution, expected_solution ) );
 }
+
+TEST_CASE_METHOD( WordSearch__TestFixture, "word_search__search_in_direction__east", "[word_search]" ){
+    unsigned long word_index;
+
+    Array__WordSearch__Solution expected_solutions = {
+        .data = (WordSearch__Solution*)(const WordSearch__Solution[ 10 ]) {
+            {
+                .word = string__literal( "SCOTTY" ),
+                .disposition = WordSearch__Solution__Disposition__Found,
+                .sequence = {
+                    .start = {
+                        .row = 5,
+                        .column = 0
+                    },
+                    .span = {
+                        .magnitude = 6,
+                        .direction = WordSearch__Direction__East
+                    }
+                }
+            },
+            {
+                .word = string__literal( "SPOCK" ),
+                .disposition = WordSearch__Solution__Disposition__NotFound,
+            },
+            {
+                .word = string__literal( "BONES" ),
+                .disposition = WordSearch__Solution__Disposition__NotFound,
+            },
+            {
+                .word = string__literal( "UHURA" ),
+                .disposition = WordSearch__Solution__Disposition__NotFound,
+            },
+            {
+                .word = string__literal( "KIRK" ),
+                .disposition = WordSearch__Solution__Disposition__NotFound,
+            },
+            {
+                .word = string__literal( "SULU" ),
+                .disposition = WordSearch__Solution__Disposition__NotFound,
+            },
+            {
+                .word = string__literal( "KHAN" ),
+                .disposition = WordSearch__Solution__Disposition__NotFound,
+            },
+            {
+                .word = string__literal( "RIKER" ),
+                .disposition = WordSearch__Solution__Disposition__NotFound,
+            },
+            {
+                .word = string__literal( "WORF" ),
+                .disposition = WordSearch__Solution__Disposition__NotFound,
+            },
+            {
+                .word = string__literal( "ABCDEFG" ),
+                .disposition = WordSearch__Solution__Disposition__NotFound,
+            }
+        },
+        .length = 10,
+        .capacity = 10,
+        .element_size = sizeof( WordSearch__Solution )
+    };
+
+    Array__WordSearch__Solution solutions;
+    array__word_search__solution__initialize( &solutions, system_allocator.allocator, words.length );
+
+    // Test whether expected solution is found
+    REQUIRE(
+        word_search__search_in_direction(
+            words,
+            grid,
+            grid_hash_map,
+            WordSearch__Direction__East,
+            &solutions,
+                NULL
+        )
+    );
+
+    REQUIRE( array__word_search__solution__equals( solutions, expected_solutions ) );
+    // Test whether parameter out_solutions->length <= words->length returns 0
+
+    array__word_search__solution__clear( &solutions, system_allocator.allocator );
+    array__word_search__solution__initialize( &solutions, system_allocator.allocator, 1 );
+
+    Error error = {0};
+    REQUIRE_FALSE(
+        word_search__search_in_direction(
+            words,
+            grid,
+            grid_hash_map,
+            WordSearch__Direction__East,
+            &solutions,
+            &error
+        )
+    );
+    REQUIRE( error.code == WordSearch__ErrorType__InsufficientCapacity );
+
+    array__word_search__solution__clear( &solutions, system_allocator.allocator );
+
+    // Test whether parameter solutions == NULL returns 0
+    error = { 0 };
+    REQUIRE_FALSE(
+        word_search__search_in_direction(
+            words,
+            grid,
+            grid_hash_map,
+            WordSearch__Direction__East,
+            NULL,
+            &error
+        )
+    );
+    REQUIRE( error.code == WordSearch__ErrorType__NullReference );
+}
