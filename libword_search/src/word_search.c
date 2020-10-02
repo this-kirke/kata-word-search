@@ -65,9 +65,25 @@ WordSearch__Solution word_search__find_word(
     WordSearch__Grid grid,
     WordSearch__GridHashMap grid_hash_map
 ){
-    (void)( word );
-    (void)( grid );
-    (void)( grid_hash_map );
+    for(
+        WordSearch__Direction direction = WordSearch__Direction__East;
+        direction < WordSearch__Direction__COUNT;
+        direction++
+    ){
+        WordSearch__Solution solution = word_search__find_word_in_direction(
+            word,
+            grid,
+            grid_hash_map,
+            direction
+        );
 
-    return (WordSearch__Solution) { 0 };
+        if( solution.disposition == WordSearch__Solution__Disposition__Found ){
+            return solution;
+        }
+    }
+
+    return (WordSearch__Solution) {
+        .word = word,
+        .disposition = WordSearch__Solution__Disposition__NotFound
+    };
 }
