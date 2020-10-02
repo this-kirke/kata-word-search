@@ -66,6 +66,7 @@ WordSearch__Solution word_search__find_word(
  *  \param words The list of the words to be searched for in the grid.
  *  \param grid The grid in which to search for the provided words.
  *  \param grid_hash_map The WordSearch__GridHashMap from which candidate entries will be retrieved.
+ *  \param direction The direction in which to search.
  *  \param out__solutions An out parameter. This is a pointer to a pre-allocated Array__WordSearch__Solution.
  *  The allocated capacity must be greater than or equal to the length of \p words.
  *  \param out__error An out parameter. If an error occurs while executing the search, then this function will return
@@ -80,6 +81,27 @@ bool word_search__search_in_direction(
     WordSearch__GridHashMap grid_hash_map,
     WordSearch__Direction direction,
     Array__WordSearch__Solution* out_solutions,
+    Error *out__error
+);
+
+/**
+ *  \brief This method searches the grid for all of the given words
+ *  \param words The list of the words to be searched for in the grid.
+ *  \param grid The grid in which to search for the provided words.
+ *  \param grid_hash_map The WordSearch__GridHashMap from which candidate entries will be retrieved.
+ *  \param out__solutions An out parameter. This is a pointer to a pre-allocated Array__WordSearch__Solution.
+ *  The allocated capacity must be greater than or equal to the length of \p words.
+ *  \param out__error An out parameter. If an error occurs while executing the search, then this function will return
+ *  false, and this parameter will store the details of the encountered error.
+ *  \returns Returns true if the search was completed successfully. The search can fail if \p out_solutions is NULL,
+ *  or if it lacks the required capacity to hold solutions for every word.
+ *  \returns Returns false if the search was not completed successully.
+ */
+bool word_search__search(
+    Array__String words,
+    WordSearch__Grid grid,
+    WordSearch__GridHashMap grid_hash_map,
+    Array__WordSearch__Solution *out__solutions,
     Error *out__error
 );
 

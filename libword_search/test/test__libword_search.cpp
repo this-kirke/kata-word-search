@@ -312,3 +312,151 @@ TEST_CASE_METHOD( WordSearch__TestFixture, "word_search__search_in_direction__ea
     );
     REQUIRE( error.code == WordSearch__ErrorType__NullReference );
 }
+
+TEST_CASE_METHOD( WordSearch__TestFixture, "word_search__search", "[word_search]" ){
+    Array__WordSearch__Solution expected_solutions = {
+        .data = (WordSearch__Solution*)(const WordSearch__Solution[ 10 ]) {
+            {
+                .word = string__literal( "SCOTTY" ),
+                .disposition = WordSearch__Solution__Disposition__Found,
+                .sequence = {
+                    .start = {
+                        .row = 5,
+                        .column = 0
+                    },
+                    .span = {
+                        .magnitude = 6,
+                        .direction = WordSearch__Direction__East
+                    }
+                }
+            },
+            {
+                .word = string__literal( "SPOCK" ),
+                .disposition = WordSearch__Solution__Disposition__Found,
+                .sequence = {
+                    .start = {
+                        .row = 1,
+                        .column = 2
+                    },
+                    .span = {
+                        .magnitude = 5,
+                        .direction = WordSearch__Direction__SouthEast
+                    }
+                }
+            },
+            {
+                .word = string__literal( "BONES" ),
+                .disposition = WordSearch__Solution__Disposition__Found,
+                .sequence = {
+                    .start = {
+                        .row = 6,
+                        .column = 0
+                    },
+                    .span = {
+                        .magnitude = 5,
+                        .direction = WordSearch__Direction__South
+                    }
+                }
+            },
+            {
+                .word = string__literal( "UHURA" ),
+                .disposition = WordSearch__Solution__Disposition__Found,
+                .sequence = {
+                    .start = {
+                        .row = 0,
+                        .column = 4
+                    },
+                    .span = {
+                        .magnitude = 5,
+                        .direction = WordSearch__Direction__SouthWest
+                    }
+                }
+            },
+            {
+                .word = string__literal( "KIRK" ),
+                .disposition = WordSearch__Solution__Disposition__Found,
+                .sequence = {
+                    .start = {
+                        .row = 7,
+                        .column = 4
+                    },
+                    .span = {
+                        .magnitude = 4,
+                        .direction = WordSearch__Direction__West
+                    }
+                }
+            },
+            {
+                .word = string__literal( "SULU" ),
+                .disposition = WordSearch__Solution__Disposition__Found,
+                .sequence = {
+                    .start = {
+                        .row = 3,
+                        .column = 3
+                    },
+                    .span = {
+                        .magnitude = 4,
+                        .direction = WordSearch__Direction__NorthWest
+                    }
+                }
+            },
+            {
+                .word = string__literal( "KHAN" ),
+                .disposition = WordSearch__Solution__Disposition__Found,
+                .sequence = {
+                    .start = {
+                        .row = 9,
+                        .column = 5
+                    },
+                    .span = {
+                        .magnitude = 4,
+                        .direction = WordSearch__Direction__North
+                    }
+                }
+            },
+            {
+                .word = string__literal( "RIKER" ),
+                .disposition = WordSearch__Solution__Disposition__Found,
+                .sequence = {
+                    .start = {
+                        .row = 14,
+                        .column = 6
+                    },
+                    .span = {
+                        .magnitude = 5,
+                        .direction = WordSearch__Direction__NorthEast
+                    }
+                }
+            },
+            {
+                .word = string__literal( "WORF" ),
+                .disposition = WordSearch__Solution__Disposition__Found,
+                .sequence = {
+                    .start = {
+                        .row = 14,
+                        .column = 11
+                    },
+                    .span = {
+                        .magnitude = 4,
+                        .direction = WordSearch__Direction__NorthEast
+                    }
+                }
+            },
+            {
+                .word = string__literal( "ABCDEFG" ),
+                .disposition = WordSearch__Solution__Disposition__NotFound
+            }
+        },
+        .length = 10,
+        .capacity = 10,
+        .element_size = sizeof( WordSearch__Solution )
+    };
+
+    Array__WordSearch__Solution solutions;
+    array__word_search__solution__initialize( &solutions, system_allocator.allocator, words.length );
+
+    REQUIRE( word_search__search( words, grid, grid_hash_map, &solutions, NULL ) );
+    REQUIRE( array__word_search__solution__equals( solutions, expected_solutions ) );
+
+    array__word_search__solution__clear( &solutions, system_allocator.allocator );
+}

@@ -136,3 +136,19 @@ bool word_search__search_in_direction(
 
     return true;
 }
+
+bool word_search__search(
+    Array__String words,
+    WordSearch__Grid grid,
+    WordSearch__GridHashMap grid_hash_map,
+    Array__WordSearch__Solution* out__solutions,
+    Error *out__error
+){
+    (void)( words );
+    (void)( grid );
+    (void)( grid_hash_map );
+    (void)( out__solutions );
+    (void)( out__error );
+
+    return false;
+}
