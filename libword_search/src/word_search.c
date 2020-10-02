@@ -96,12 +96,43 @@ bool word_search__search_in_direction(
     Array__WordSearch__Solution* out__solutions,
     Error *out__error
 ){
-    (void)( words );
-    (void)( grid );
-    (void)( grid_hash_map );
-    (void)( direction );
-    (void)( out__solutions );
-    (void)( out__error );
+    if( out__solutions == NULL ){
+        error__set(
+            out__error,
+            "word_search",
+            WordSearch__ErrorType__NullReference,
+            "word_search__search_in_direction: Parameter out__solutions cannot be NULL."
+        );
 
-    return false;
+        return false;
+    }
+
+    if( out__solutions->capacity < words.length ){
+        error__set(
+            out__error,
+            "word_search",
+            WordSearch__ErrorType__InsufficientCapacity,
+            "word_search__search_in_direction: Parameter out__solutions does not have sufficient capacity to store solutions for all words. "
+            "Word count: %llu. Capacity of parameter out__solutions: %llu.\n",
+            words.length,
+            out__solutions->capacity
+        );
+
+        return false;
+    }
+
+    out__solutions->length = 0;
+
+    for( unsigned long word_index = 0; word_index < words.length; word_index++ ){
+        out__solutions->data[ word_index ] = word_search__find_word_in_direction(
+            words.data[ word_index ],
+            grid,
+            grid_hash_map,
+            direction
+        );
+
+        out__solutions->length += 1;
+    }
+
+    return true;
 }
