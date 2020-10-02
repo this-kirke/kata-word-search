@@ -77,7 +77,7 @@ bool word_search__grid__entry( WordSearch__Grid grid, WordSearch__GridCoordinate
 /**
  *  \brief Given a sequence and an index into that sequence, this method looks up the value of the value of
  *  the corresponding grid entry.
- *  \param grid A pointer to the WordSearch__Grid containing the desired entry.
+ *  \param grid The WordSearch__Grid containing the desired entry.
  *  \param sequence A pointer to the WordSearch__GridSequence.
  *  \param index The index into the sequence of the desired entry.
  *  \param out_entry An out parameter. Upon successful completion, this will be assigned to the value of the
